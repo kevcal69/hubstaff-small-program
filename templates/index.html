@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hubstaff Mini Test Program</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+</head>
+<body>
+    <h1>Hubstaff</h1>
+    <form>
+        <label>Input desired date: </label>
+        <input type="date" name="date" id="date">
+        <button type="button" id="submit">Submit</button>
+    </form>
+
+    Date: {{ date_request }}
+    <a href="/static/{{date_request}}.csv">Link Download</a>
+
+    <table class="pure-table">
+        <tbody>
+            {% for values in context %}
+                <tr>
+                    {% for value in values %}
+                           <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+            {% else%}
+                <h4>No data</h4>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script type="text/javascript">
+        var submit = document.querySelector('#submit');
+        submit.addEventListener('click', function() {
+            var date = document.querySelector('#date');
+            window.location = window.origin + '?date=' +date.value;
+        });
+    </script>
+</body>
+</html>
